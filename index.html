@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Payment Terms</title>
+</head>
+<body>
+    <div>
+        <!-- place for IMG and landing Text -->
+    </div>
+    <div id="content-container">
+        <div id="content-container-inner">
+            <div id="paymentTitle">
+                <h1>Get Started With Oasis Payment Calculator</h1>
+            </div>
+            <div id="cal-max-width">
+                <div id="input-flex">
+                    <div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Purchase Price:</p>
+                            <input class="form__field" type="input" id="purchase-price-input" value="200000" />                                     
+                        </div>
+                    </div>
+                    <div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Deposit-Percentage:</p>
+                            <p id="deposit-value">20</p>                            
+                        </div>
+                        <input type="range" min="0" step="10" max="40" list="tickmarks" id="deposit-input"
+                            onchange="document.getElementById('deposit-value').innerHTML = this.value">
+                        <datalist id="tickmarks">
+                            <option value="0" label="0%"></option>
+                            <option value="10" label="10%"></option>
+                            <option value="20" label="20%"></option>
+                            <option value="30" label="30%"></option>
+                            <option value="40" label="40%"></option>
+                        </datalist>
+                    </div>
+                    <div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Number Of Years:</p>
+                            <p id="yearValue">4</p>                            
+                        </div>
+                        <input type="range" min="3" step="1" max="5" list="tickmarks" id="year-range"
+                            onchange="document.getElementById('yearValue').innerHTML = this.value">
+                        <datalist id="tickmarks">
+                            <option value="3" label="3"></option>
+                            <option value="4" label="4"></option>
+                            <option value="5" label="5"></option>
+                        </datalist>                        
+                    </div>
+                    <div>
+                        <button class="button-86" type="submit" id="submit-button">Calculate</button>
+                    </div>
+                </div>
+                <div id="infoFlex">
+                    <div id="infoFlexInner">
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Number Of Payments:</p>
+                            <p id="numOfPayments"> </p>                            
+                        </div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Reservation Fee:</p>
+                            <p id="resFee"></p>                        
+                        </div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Deposit Amount:</p>
+                            <p id="depositValue"></p>                        
+                        </div>  
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Monthly Fee:</p>
+                            <p id="monthlyFee">No Output</p>                        
+                        </div>
+                        <div class="infoRow">
+                            <p class="infoFlexRight">Daily Amount:</p>
+                            <p id="dailyAmountValue"></p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <script>
+        var buttonObj = document.getElementById("submit-button");
+        buttonObj.onclick = function (event) {
+            var purchasePrice = document.getElementById("purchase-price-input").value;
+            var depositNum = document.getElementById("deposit-input").value;
+            var yearRange = document.getElementById("year-range").value;
+
+            if (depositNum == 0) {
+                var resFeeValue = 2000;
+                var depositValue = 0;
+            } else {
+                var resFeeValue = 1000;
+                var depositValue = purchasePrice * (depositNum / 100)
+            }
+
+            purchasePrice -= resFeeValue;
+            purchasePrice -= depositValue;
+
+            var numberOfPayments = yearRange * 12;
+            var result = (purchasePrice / numberOfPayments);
+            var dailyAmountValue = ((result * 12 ) / 52) / 7;
+
+            document.getElementById("depositValue").innerHTML = depositValue.toFixed(2);
+            document.getElementById("numOfPayments").innerHTML = numberOfPayments.toFixed(2);
+            document.getElementById("monthlyFee").innerHTML = result.toFixed(2);
+            document.getElementById("resFee").innerHTML = resFeeValue.toFixed(2);
+            document.getElementById("dailyAmountValue").innerHTML = dailyAmountValue.toFixed(2);;
+        };
+    </script>
+</body>
+</html>
