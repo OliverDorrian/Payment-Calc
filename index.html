@@ -11,12 +11,14 @@
     <div>
         <!-- place for IMG and landing Text -->
     </div>
+    <div id="paymentTitle">
+        <div id="paymentTitleInner">
+          <h1>Get Started With Oasis' Payment Calculator</h1>
+          <p>Check your potential savings</p>
+        </div>
+    </div>
     <div id="content-container">
         <div id="content-container-inner">
-            <div id="paymentTitle">
-                <h1>Get Started With Oasis' Payment Calculator</h1>
-                <p>Check your potential savings</p>
-            </div>
             <div id="input-flex">
                 <div>
                     <div class="infoRow">
@@ -59,22 +61,19 @@
                 <div id="infoFlex">
                     <div id="infoFlexInner">
                         <div class="infoRow">
-                            <p class="infoFlexRight">Reservation Fee:</p>
-                            <p id="resFee"></p>                        
+                            <p id="resFee">$2000.00 Reservation Fee</p>                        
                         </div>
                         <div class="infoRow">
-                            <p class="infoFlexRight">Deposit Amount:</p>
-                            <p id="depositValue"></p>                        
+                            <p id="depositValue">$0.00 Deposit Fee</p>                        
                         </div>  
                         <div class="infoRow">
-                            <p class="infoFlexRight">Monthly Fee:</p>
-                            <p id="monthlyFee">No Output</p>                        
+                            <p id="monthlyFee">$5500.00 Monthly Fee</p>                        
                         </div>
                     </div>
                 </div>
                 <div id="result-flex">
                     <div class="infoRow-bellow">
-                        <p id="dailyAmountValue">$ 0.00</p>                            
+                        <p id="dailyAmountValue">$181.32 per day</p>                            
                     </div>
                     <div>
                         <button class="button-86" type="submit" id="submit-button">Calculate</button>
@@ -121,9 +120,9 @@
             var result = (purchasePrice / numberOfPayments);
             var dailyAmountValue = ((result * 12 ) / 52) / 7;
 
-            document.getElementById("depositValue").innerHTML = "$" + depositValue.toFixed(2);
-            document.getElementById("monthlyFee").innerHTML = "$" + result.toFixed(2);
-            document.getElementById("resFee").innerHTML = "$" + resFeeValue.toFixed(2);
+            document.getElementById("depositValue").innerHTML = "$" + depositValue.toFixed(2) + " Deposit Amount";
+            document.getElementById("monthlyFee").innerHTML = "$" + result.toFixed(2) + " Monthly Payment";
+            document.getElementById("resFee").innerHTML = "$" + resFeeValue.toFixed(2) + " Reservation Fee";
             document.getElementById("dailyAmountValue").innerHTML = "$" + dailyAmountValue.toFixed(2) + " per day";
         };
     </script>
