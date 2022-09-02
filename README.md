@@ -2,9 +2,9 @@
 This is the repository for Oasis land developments features a payment-based calculator for land lots; users can enter:
 
 # 👤 User Inputs 👤
--Their Plot Price
--Their Deposit Percentages
--Their Contract Term Length
+- Their Plot Price
+- Their Deposit Percentages
+- Their Contract Term Length
 
 # 📈 Results Shown 📈
 - Reservation Fee
