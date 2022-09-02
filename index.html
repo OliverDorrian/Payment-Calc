@@ -85,10 +85,13 @@
     </div>
 
     <script>
+        function roundToTwo(num) {
+          return +(Math.round(num + "e+2") + "e-2");
+        }
         var buttonObj = document.getElementById("submit-button");
         buttonObj.onclick = function (event) {
             var purchasePrice = document.getElementById("purchase-price-input").value;
-            
+
             var depositNum = document.getElementsByName("test");
             for (i = 0; i < depositNum.length; i++) {
               if (depositNum[i].checked == true) {
@@ -111,7 +114,7 @@
                 var depositValue = 0;
             } else {
                 var resFeeValue = 1000;
-                var depositValue = purchasePrice * (depositNum / 100)
+                var depositValue = (purchasePrice * (depositNum / 100));
             }
 
             purchasePrice -= resFeeValue;
@@ -119,12 +122,12 @@
 
             var numberOfPayments = yearRange * 12;
             var result = (purchasePrice / numberOfPayments);
-            var dailyAmountValue = ((result * 12 ) / 52) / 7;
+            var dailyAmountValue = (((result * 12 ) / 52) / 7);
 
-            document.getElementById("depositValue").innerHTML = "$" + depositValue.toFixed(2) + " Deposit Amount";
-            document.getElementById("monthlyFee").innerHTML = "$" + result.toFixed(2) + " Monthly Payment";
-            document.getElementById("resFee").innerHTML = "$" + resFeeValue.toFixed(2) + " Reservation Fee";
-            document.getElementById("dailyAmountValue").innerHTML = "$" + dailyAmountValue.toFixed(2) + " per day";
+            document.getElementById("depositValue").innerHTML = "$" +  roundToTwo(depositValue) + " Deposit Amount";
+            document.getElementById("monthlyFee").innerHTML = "$" + roundToTwo(result) + " Monthly Payment";
+            document.getElementById("resFee").innerHTML = "$" + roundToTwo(resFeeValue)  + " Reservation Fee";
+            document.getElementById("dailyAmountValue").innerHTML = "$" + roundToTwo(dailyAmountValue) + " per day";
         };
     </script>
 </body>

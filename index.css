@@ -34,7 +34,6 @@ body, html {
 }
 
 #paymentTitleInner {
-    padding: 30px;
     padding-bottom: 0;
     padding-top: 0;
 }
@@ -453,6 +452,7 @@ body, html {
     }
 
     #paymentTitleInner {
+        font-size: 1.7em;
         text-align: center;
         padding: unset;
     }
