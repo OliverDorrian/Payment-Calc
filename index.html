@@ -14,54 +14,50 @@
     <div id="content-container">
         <div id="content-container-inner">
             <div id="paymentTitle">
-                <h1>Get Started With Oasis Payment Calculator</h1>
+                <h1>Get Started With Oasis' Payment Calculator</h1>
+                <p>Check your potential savings</p>
             </div>
-            <div id="cal-max-width">
-                <div id="input-flex">
-                    <div>
-                        <div class="infoRow">
-                            <p class="infoFlexRight">Purchase Price:</p>
-                            <input class="form__field" type="input" id="purchase-price-input" value="200000" />                                     
-                        </div>
-                    </div>
-                    <div>
-                        <div class="infoRow">
-                            <p class="infoFlexRight">Deposit-Percentage:</p>
-                            <p id="deposit-value">20 </p>                            
-                        </div>
-                        <input type="range" min="0" step="10" max="40" list="tickmarks" id="deposit-input"
-                            onchange="document.getElementById('deposit-value').innerHTML = this.value">
-                        <datalist id="tickmarks">
-                            <option value="0" label="0%"></option>
-                            <option value="10" label="10%"></option>
-                            <option value="20" label="20%"></option>
-                            <option value="30" label="30%"></option>
-                            <option value="40" label="40%"></option>
-                        </datalist>
-                    </div>
-                    <div>
-                        <div class="infoRow">
-                            <p class="infoFlexRight">Number Of Years:</p>
-                            <p id="yearValue">4</p>                            
-                        </div>
-                        <input type="range" min="3" step="1" max="5" list="tickmarks" id="year-range"
-                            onchange="document.getElementById('yearValue').innerHTML = this.value">
-                        <datalist id="tickmarks">
-                            <option value="3" label="3"></option>
-                            <option value="4" label="4"></option>
-                            <option value="5" label="5"></option>
-                        </datalist>                        
-                    </div>
-                    <div>
-                        <button class="button-86" type="submit" id="submit-button">Calculate</button>
+            <div id="input-flex">
+                <div>
+                    <div class="infoRow">
+                        <p class="infoFlexRight ppFontSize" >Purchase Price:</p>
+                        <input class="form__field ppFontSize" type="input" id="purchase-price-input" value="200000" />
                     </div>
                 </div>
+                <div class="infoRow-one-to-one non-input">
+                    <div class="infoRow">
+                        <p class="infoFlexRight dpFontSize">Deposit-Percentage:</p>
+                    </div>
+                    <div class="select" tabindex="1">
+                      <input class="selectopt" name="test" type="radio" id="opt1" checked value="0%">
+                      <label for="opt1" class="option">0%</label>
+                      <input class="selectopt" name="test" type="radio" id="opt2" value="10%">
+                      <label for="opt2" class="option">10%</label>
+                      <input class="selectopt" name="test" type="radio" id="opt3" value="20%">
+                      <label for="opt3" class="option">20%</label>
+                      <input class="selectopt" name="test" type="radio" id="opt4" value="30%">
+                      <label for="opt4" class="option">30%</label>
+                      <input class="selectopt" name="test" type="radio" id="opt5" value="40%">
+                      <label for="opt5" class="option">40%</label>
+                    </div>
+                </div>
+                <div class="infoRow-one-to-one non-input">
+                    <div class="infoRow">
+                        <p class="infoFlexRight nyFontSize" >Number Of Years:</p>
+                    </div>
+                    <div class="select-1" tabindex="2">
+                      <input class="selectopt" name="test-1" type="radio" id="opt6" checked value="3">
+                      <label for="opt6" class="option">3</label>
+                      <input class="selectopt" name="test-1" type="radio" id="opt7" value="4">
+                      <label for="opt7" class="option">4</label>
+                      <input class="selectopt" name="test-1" type="radio" id="opt8" value="5">
+                      <label for="opt8" class="option">5</label>
+                    </div>
+                </div>
+            </div>
+            <div id="cal-max-width">    
                 <div id="infoFlex">
                     <div id="infoFlexInner">
-                        <div class="infoRow">
-                            <p class="infoFlexRight">Number Of Payments:</p>
-                            <p id="numOfPayments"> </p>                            
-                        </div>
                         <div class="infoRow">
                             <p class="infoFlexRight">Reservation Fee:</p>
                             <p id="resFee"></p>                        
@@ -74,10 +70,14 @@
                             <p class="infoFlexRight">Monthly Fee:</p>
                             <p id="monthlyFee">No Output</p>                        
                         </div>
-                        <div class="infoRow">
-                            <p class="infoFlexRight">Daily Amount:</p>
-                            <p id="dailyAmountValue"></p>                            
-                        </div>
+                    </div>
+                </div>
+                <div id="result-flex">
+                    <div class="infoRow-bellow">
+                        <p id="dailyAmountValue">$ 0.00</p>                            
+                    </div>
+                    <div>
+                        <button class="button-86" type="submit" id="submit-button">Calculate</button>
                     </div>
                 </div>
             </div>
@@ -88,10 +88,25 @@
         var buttonObj = document.getElementById("submit-button");
         buttonObj.onclick = function (event) {
             var purchasePrice = document.getElementById("purchase-price-input").value;
-            var depositNum = document.getElementById("deposit-input").value;
-            var yearRange = document.getElementById("year-range").value;
+            
+            var depositNum = document.getElementsByName("test");
+            for (i = 0; i < depositNum.length; i++) {
+              if (depositNum[i].checked == true) {
+                var depositNum = depositNum[i].defaultValue;
+              }
+            }
 
-            if (depositNum == 0) {
+            depositNum = depositNum.replace("%", '')
+
+            var yearRange = document.getElementsByName("test-1");
+            for (i = 0; i < yearRange.length; i++) {
+              if (yearRange[i].checked == true) {
+                var yearRange = yearRange[i].defaultValue;
+              }
+            }
+            yearRange = yearRange.replace("%", '')
+
+            if (depositNum == "0") {
                 var resFeeValue = 2000;
                 var depositValue = 0;
             } else {
@@ -106,11 +121,10 @@
             var result = (purchasePrice / numberOfPayments);
             var dailyAmountValue = ((result * 12 ) / 52) / 7;
 
-            document.getElementById("depositValue").innerHTML = depositValue.toFixed(2);
-            document.getElementById("numOfPayments").innerHTML = numberOfPayments.toFixed(2);
-            document.getElementById("monthlyFee").innerHTML = result.toFixed(2);
-            document.getElementById("resFee").innerHTML = resFeeValue.toFixed(2);
-            document.getElementById("dailyAmountValue").innerHTML = dailyAmountValue.toFixed(2);;
+            document.getElementById("depositValue").innerHTML = "$" + depositValue.toFixed(2);
+            document.getElementById("monthlyFee").innerHTML = "$" + result.toFixed(2);
+            document.getElementById("resFee").innerHTML = "$" + resFeeValue.toFixed(2);
+            document.getElementById("dailyAmountValue").innerHTML = "$" + dailyAmountValue.toFixed(2) + " per day";
         };
     </script>
 </body>
